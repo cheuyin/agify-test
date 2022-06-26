@@ -1,6 +1,7 @@
 const nameInput = document.querySelector("input#name");
 const sendButton = document.querySelector("button");
-const ageDisplay = document.querySelector("p");
+const ageDisplay = document.querySelector("p#age");
+const dataPointsDisplay = document.querySelector("p#data_points");
 
 const apiURL = "https://api.agify.io?";
 
@@ -14,6 +15,8 @@ function handleButton() {
       return response.json();
     })
     .then(data => {
+      console.log(data);
       ageDisplay.textContent = data.age;
+      dataPointsDisplay.textContent = data.count;
     });  
 }
