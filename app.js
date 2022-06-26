@@ -8,15 +8,16 @@ const apiURL = "https://api.agify.io?";
 sendButton.addEventListener("click", handleButton)
 
 function handleButton() {
+  getData().then(data => showData(data));
+}
+
+async function getData() {
   const name = nameInput.value;
-  const fetchPromise = fetch(apiURL + "name=" + name);
-  fetchPromise
-    .then(response => {
-      return response.json();
-    })
-    .then(data => {
-      console.log(data);
-      ageDisplay.textContent = data.age;
-      dataPointsDisplay.textContent = data.count;
-    });  
+  const fetchPromise = await fetch(apiURL + "name=" + name);
+  return await fetchPromise.json();
+}
+
+function showData(data) {
+  ageDisplay.textContent = data.age;
+  dataPointsDisplay.textContent = data.count;
 }
